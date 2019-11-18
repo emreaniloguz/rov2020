@@ -13,6 +13,26 @@ import time
 class MainThread(QtCore.QThread):
 
     def run(self):
+        while True:
+            if ui.lineEdit_d.text() == "":
+                Kd = float(ui.verticalSlider_d.value())/10
+            else:
+                Kd = float(ui.lineEdit_d.text())
+
+            if ui.lineEdit_i.text() == "":
+                Ki = float(ui.verticalSlider_i.value())/10
+            else:
+                Ki = float(ui.lineEdit_i.text())
+
+            if ui.lineEdit_p.text() == "":
+                Kp = float(ui.verticalSlider_p.value())/(10)
+            else:
+                Kp = float(ui.lineEdit_p.text())
+
+            ui.label_42.setText(str(Kd))
+            ui.label_52.setText(str(Kp))
+            ui.label_62.setText(str(Ki))
+
         master = mavutil.mavlink_connection('udpin:0.0.0.0:15000')
         master.wait_heartbeat()
         master.arducopter_arm()
@@ -204,19 +224,19 @@ class Ui_PIDControl(object):
 
         # -----------------------------------------------
         self.verticalSlider_d.setMinimum(0)
-        self.verticalSlider_d.setMaximum(10)
+        self.verticalSlider_d.setMaximum(100)
         self.verticalSlider_d.setValue(0)
         self.verticalSlider_d.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.verticalSlider_d.setTickInterval(5)
 
         self.verticalSlider_i.setMinimum(0)
-        self.verticalSlider_i.setMaximum(10)
+        self.verticalSlider_i.setMaximum(100)
         self.verticalSlider_i.setValue(0)
         self.verticalSlider_i.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.verticalSlider_i.setTickInterval(5)
 
         self.verticalSlider_p.setMinimum(0)
-        self.verticalSlider_p.setMaximum(10)
+        self.verticalSlider_p.setMaximum(100)
         self.verticalSlider_p.setValue(0)
         self.verticalSlider_p.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.verticalSlider_p.setTickInterval(5)
