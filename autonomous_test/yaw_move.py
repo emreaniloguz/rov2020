@@ -8,7 +8,6 @@ master.arducopter_arm()
 
 bool = False
 start = time.time()
-cast_param = 0
 
 while True:
     try:
@@ -18,9 +17,7 @@ while True:
             yaw = msg["yaw"] * 60
             yaw_final = yaw + 30
             bool = True
-        if yaw_diff > 180 or yaw_diff < -180:
-            yaw_diff = cast_param
-        yaw = msg["yaw"]*60 - cast_param
+        yaw = msg["yaw"]*60
         yaw_diff = yaw_final - yaw
         print("yaw difference : ", yaw_diff)
         #print("yaw: ", yaw)
@@ -39,7 +36,7 @@ while True:
         elif(yaw_diff<=-60):
             yaw_diff = -60
 
-        if yaw_diff > 180 :
+        if yaw_diff > 180:
             yaw_diff = - (360 - yaw_diff)
 
         if yaw_diff < -180 :
