@@ -22,6 +22,12 @@ while True:
         print("yaw difference : ", yaw_diff)
         #print("yaw: ", yaw)
 
+        if yaw_diff > 180:
+            yaw_diff = yaw_diff - 360
+
+        if yaw_diff < -180 :
+            yaw_diff =  360 + yaw_diff
+
         if(yaw_diff <2.5 and yaw_diff>-2.5):
             yaw_diff = 0
 
@@ -36,13 +42,8 @@ while True:
         elif(yaw_diff<=-60):
             yaw_diff = -60
 
-        if yaw_diff > 180:
-            yaw_diff = - (360 - yaw_diff)
 
-        if yaw_diff < -180 :
-            yaw_diff =  (360 + yaw_diff)
-
-        if(time.time()-start>0.2):
+        if(time.time()-start>0.1):
             #print(time.time()-start)
             start = time.time()
             master.mav.manual_control_send(
