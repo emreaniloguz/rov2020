@@ -35,6 +35,13 @@ while True:
                 thrust,
                 0)
         else:
+            master.mav.manual_control_send(
+                master.target_system,
+                0,
+                0,
+                500,
+                0,
+                0)
             break
 
     except Exception as msg:
